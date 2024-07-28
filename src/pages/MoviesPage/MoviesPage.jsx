@@ -1,25 +1,26 @@
 import { useState, useEffect } from "react";
 import { getFilteredMovies } from "../../services/api";
-import { Link } from "react-router-dom";
-
+import { Link, useSearchParams } from "react-router-dom";
 
 const MoviesPage = () => {
-    const [filterValue, setFilterValue] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [filterValue, setFilterValue] = useState(searchParams.get('query') || '');
     const [movies, setMovies] = useState([]);
 
     const handleChangeFilter = (newValue) => {
         setFilterValue(newValue);
+        setSearchParams({ query: newValue });
     };
 
     useEffect(() => {
         const fetchFilteredMovies = async () => {
             if (filterValue.trim() === '') {
-                setMovies([]); // Clear movies if the search field is empty
+                setMovies([]); 
                 return;
             }
             try {
                 const response = await getFilteredMovies(filterValue);
-                setMovies(response.results); // Assuming the API response has a 'results' property
+                setMovies(response.results); 
             } catch (error) {
                 console.log(error);
             }
@@ -29,17 +30,16 @@ const MoviesPage = () => {
     }, [filterValue]);
 
     return (
-        <div >
+        <div>
             <input
                 type="search"
                 value={filterValue}
                 placeholder="Search movies"
                 onChange={e => handleChangeFilter(e.target.value)}
-                
             />
-            <ul >
+            <ul>
                 {movies.map(movie => (
-                    <li key={movie.id} >
+                    <li key={movie.id}>
                         <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
                     </li>
                 ))}

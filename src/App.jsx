@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import Header from "./components/Header/Header";
-import css from "./App.module.css";
 
-// Lazy load the components
+import css from "./App.module.css";
+import Navigation from "./components/Navigation/Navigation";
+
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
 const MoviesDetailsPage = lazy(() => import("./pages/MoviesDetailsPage/MoviesDetailsPage"));
@@ -14,7 +14,7 @@ const MovieReviews = lazy(() => import("./components/MovieReviews/MovieReviews")
 function App() {
   return (
     <>
-      <Header />
+      <Navigation />
       <div className={css.container}>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
