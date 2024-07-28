@@ -1,0 +1,24 @@
+.castItem{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.castImage{
+    width: 150px;
+}
+
+.castDetails{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.castList{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.castItem{
+    width: 200px;
+}

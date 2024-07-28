@@ -1,0 +1,54 @@
+.title{
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.wrapper{
+    display: flex;
+    gap: 40px;
+    align-items: center;  
+}
+
+.infoWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.genresList{
+    display: flex;
+    gap: 20px;
+}
+
+.poster{
+    width: 400px;
+    
+}
+
+.genreItem{
+    color:blueviolet;
+}
+
+.addInf{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid black;
+}
+
+.active{
+    color: red;
+}
+
+.list{
+    margin-top: 20px;
+    list-style: circle;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-left: 20px;
+}
