@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { NavLink, Outlet, useParams, useLocation, useNavigate } from "react-router-dom";
 import { getMovieDetails } from "../../services/api";
 import css from "./MoviesDetailsPage.module.css";
 import clsx from "clsx";
@@ -7,6 +7,9 @@ import clsx from "clsx";
 const MoviesDetailsPage = () => {
     const [details, setDetails] = useState({});
     const { moviesId } = useParams();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const backLocationRef = useRef(location.state?.from || '/');
 
     useEffect(() => {
         const getMovies = async () => {
@@ -20,11 +23,18 @@ const MoviesDetailsPage = () => {
 
         getMovies();
     }, [moviesId]);
+
     const buildLinkClass = ({ isActive }) => {
         return clsx(css.link, isActive && css.active);
-      };
+    };
+
+    const handleGoBack = () => {
+        navigate(backLocationRef.current);
+    };
+
     return (
         <div>
+            <button className={css.goBackButton} onClick={handleGoBack}>Go back</button>
             <div className={css.wrapper}>
                 <div className={css.posterWrapper}>
                     {details.poster_path && (
@@ -53,7 +63,6 @@ const MoviesDetailsPage = () => {
                         </ul>
                     </div>
                 </div>
-    
             </div>
             <div className={css.addInf}>
                 <p>Addition information:</p>
@@ -62,9 +71,8 @@ const MoviesDetailsPage = () => {
                     <li><NavLink to="reviews" className={buildLinkClass}>Reviews</NavLink></li>
                 </ul>
             </div>
-            <Outlet/>
+            <Outlet />
         </div>
-        
     );
 };
 
